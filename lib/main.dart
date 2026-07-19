@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shorebirdpractice/models/note.dart';
-import 'package:shorebirdpractice/screens/note_editor_screen.dart';
+import 'package:shorebirdpractice/note.dart';
+import 'package:shorebirdpractice/note_editor_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
