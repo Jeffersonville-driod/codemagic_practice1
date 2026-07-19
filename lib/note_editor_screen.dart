@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shorebirdpractice/models/note.dart';
+import 'package:shorebirdpractice/note.dart';
 import 'package:uuid/uuid.dart';
 
 class NoteEditorScreen extends StatefulWidget {
