@@ -1,0 +1,38 @@
+# This file is used to configure the build on Codemagic CI/CD.
+# For more information, see: https://docs.codemagic.io/yaml-basic-configuration/
+
+workflows:
+  android-build-workflow:
+    name: Android Build
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Set up local properties
+        script: | 
+          echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - name: Set up key properties
+        script: | 
+          echo $CM_KEYSTORE | base64 --decode > $FCI_BUILD_DIR/android/app/my-release-key.jks
+          echo "storeFile=my-release-key.jks" > $FCI_BUILD_DIR/android/key.properties
+          echo "keyAlias=$CM_KEY_ALIAS" >> $FCI_BUILD_DIR/android/key.properties
+          echo "storePassword=$CM_KEYSTORE_PASSWORD" >> $FCI_BUILD_DIR/android/key.properties
+          echo "keyPassword=$CM_KEY_PASSWORD" >> $FCI_BUILD_DIR/android/key.properties
+      - name: Get Flutter packages
+        script: | 
+          flutter pub get
+      - name: Analyze project source
+        script: | 
+          flutter analyze
+      - name: Run widget tests
+        script: | 
+          flutter test
+      - name: Build Android APK
+        script: | 
+          flutter build apk --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
