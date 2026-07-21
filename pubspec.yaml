@@ -11,13 +11,13 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  shared_preferences: ^2.3.2  # ← updated
+  shared_preferences: ^2.2.3  # ← downgraded, works with Dart 3.3+
   uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0  # ← 6.0.0 needs Dart 3.5+. 5.0.0 works with 3.3+
+  flutter_lints: ^4.0.0  # ← downgraded, works with Dart 3.3+
 
 flutter:
   uses-material-design: true
