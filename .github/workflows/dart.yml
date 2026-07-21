@@ -12,14 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'  # Upgraded from '17'
           distribution: 'temurin'
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5'
+          flutter-version: '3.27.0'  # Upgraded from '3.24.5'
           channel: 'stable'
       - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi # smaller release apks
+      - run: flutter build apk --release --split-per-abi
       - uses: actions/upload-artifact@v4
         with:
           name: android-release-apks
