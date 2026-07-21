@@ -20,14 +20,8 @@ dependencyResolutionManagement {
 rootProject.name = "shorebirdpractice"
 include(":app")
 
-val flutterSdkPath = run {
-    val properties = Properties()
-    val localPropertiesFile = File(rootDir, "local.properties")
-    if (localPropertiesFile.exists()) {
-        properties.load(FileInputStream(localPropertiesFile))
-    }
-    properties.getProperty("flutter.sdk")
-        ?: throw FileNotFoundException("flutter.sdk not set in local.properties")
-}
+// CI-Safe way to get flutter sdk
+val flutterSdkPath = System.getenv("FLUTTER_ROOT") 
+    ?: throw GradleException("FLUTTER_ROOT not found. Did you set up flutter-action?")
 
-apply(from = "$flutterSdkPath/packages/flutter_tools/gradle/flutter.gradle")
+apply(from = "$flutterSdkPath/packages/flutter_tools/gradle/app_plugin_loader.gradle")
